@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital@1&family=M+PLUS+Rounded+1c:wght@300&family=Nunito:wght@300;400&family=Play&family=Roboto+Mono:ital,wght@0,100;0,300;0,400;1,200&family=Source+Code+Pro:wght@200&family=Ubuntu:ital,wght@1,500&family=Varela+Round&family=Wix+Madefor+Display&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: 0;
+    font-family: 'Varela Round', sans-serif;
+
+}
+
+html,
+body {
+    background-color: #11001c;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #11001c;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #230e83;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #05003e;
+
+}
