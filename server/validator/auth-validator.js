@@ -3,7 +3,7 @@ const {z} = require("zod");
 const signupSchema = z.object({
     student_name:z.string({required_error:"Name required"}).trim(),
     
-    mobile_no:z.number({required_error:"Mobile Number Required"}),
+    mobile_number:z.number({required_error:"Mobile Number Required"}),
     
     password:z.string({required_error:"Password Required"}).trim(),
 
@@ -15,9 +15,12 @@ const signupSchema = z.object({
 
     gender:z.string({required_error:"Gender Required"}).trim(),
 
+    payment_date:z.string({required_error:"Payment Date Required"}),
+    due_date:z.string({required_error:"Due Date Required"}),
 
+    div:z.string({required_error:"Division Required"}).trim(),
+    society:z.string({required_error:"Society Required"}).trim(),
     std:z.number({required_error:"Std Required"})
-
 
     // pickUpTime:z.string({required_error:"PickUpTime Required"}).trim()
 })

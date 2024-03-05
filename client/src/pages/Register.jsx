@@ -1,4 +1,4 @@
-import registration_photo from '../images/register2.jpeg';
+// import registration_photo from '../images/register2.jpeg';
 import { useFormik } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
 import { registerSchema } from '../schemas';
@@ -8,17 +8,42 @@ import { toast } from 'react-toastify';
 
 const initialValues = {
     student_name: "",
-    mobile_no: "",
+    mobile_number: "",
     password: "",
     pick_up_address: "",
     drop_up_address: "",
     area: "",
+    div: "",
+    society: "",
     gender: "",
     std: "",
-    alter_no: "",
+    alternate_number: "",
 };
 
+function swap ( currentDate )
+{
+    let temp = currentDate[ 0 ];
+    currentDate[ 0 ] = currentDate[ 1 ];
+    currentDate[ 1 ] = temp;
+    const newDate = currentDate.join( '-' );
+    return newDate;
+}
 
+const currentDate = ( month ) =>
+{
+    const date = new Date();
+    let currentDate = ( date.getMonth() + month + 1 ) + "-" + date.getDate() + "-" + date.getFullYear();
+    currentDate = currentDate.split( '-' );
+    if ( currentDate[ 0 ] > 12 )
+    {
+        currentDate[ 0 ] -= 12;
+        return swap( currentDate );
+    }
+    else
+    {
+        return swap( currentDate );
+    }
+};
 
 const Register = () =>
 {
@@ -31,16 +56,20 @@ const Register = () =>
         {
             const payload = {
                 student_name: values.student_name,
-                mobile_no: parseInt( values.mobile_no ),
+                mobile_number: parseInt( values.mobile_number ),
                 password: values.password,
                 pick_up_address: values.pick_up_address,
                 drop_up_address: values.drop_up_address,
                 area: values.area,
+                div: values.div,
+                society: values.society,
                 gender: values.gender,
+                payment_date: currentDate( 1 ),
+                due_date: currentDate( 3 ),
                 std: parseInt( values.std ),
-                alter_no: values.alter_no,
+                alternate_number: values.alternate_number,
             };
-            // console.log( payload );
+            console.log( payload );
             axios.post( "http://localhost:9000/api/auth/register", payload )
                 .then( ( res ) =>
                 {
@@ -64,7 +93,7 @@ const Register = () =>
                     <div className="grid items-center md:grid-cols-2 gap-8 lg:gap-12">
                         <div>
                             <p className="inline-block text-sm font-medium bg-clip-text bg-gradient-to-l from-blue-600 to-violet-500 text-transparent dark:from-blue-400 dark:to-violet-400">
-                                Istravels: A vision for 2024
+                                Istravels: A vision for { new Date().getFullYear() }
                             </p>
 
                             <div className="mt-4 md:mb-12 max-w-2xl">
@@ -93,8 +122,8 @@ const Register = () =>
                                             <img className="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80" alt="Image Description" />
                                         </div>
                                         <div className="grow ms-4">
-                                            <div className="font-semibold text-gray-800 dark:text-gray-200">Josh Grazioso</div>
-                                            <div className="text-xs text-gray-500">Director Payments & Risk | Airbnb</div>
+                                            <div className="font-semibold text-gray-800 dark:text-gray-200">Happy Customer</div>
+                                            <div className="text-xs text-gray-500">Satisfying Service</div>
                                         </div>
                                     </div>
                                 </footer>
@@ -131,9 +160,9 @@ const Register = () =>
                                                 <div>
 
                                                     <div className="relative z-0 w-full mb-5 group">
-                                                        <input type="tel" name="mobile_no" value={ values.mobile_no } onChange={ handleChange } onBlur={ handleBlur } id="floating_password" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-                                                        <label htmlFor="floating_password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Mobile No*</label>
-                                                        { errors.mobile_no && touched.mobile_no ? <p className=' text-red-600 mt-1'>{ errors.mobile_no }</p> : null }
+                                                        <input type="tel" name="mobile_number" value={ values.mobile_number } onChange={ handleChange } onBlur={ handleBlur } id="floating_password" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                                                        <label htmlFor="floating_password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Mobile Number*</label>
+                                                        { errors.mobile_number && touched.mobile_number ? <p className=' text-red-600 mt-1'>{ errors.mobile_number }</p> : null }
                                                     </div>
                                                 </div>
                                                 <div>
@@ -168,49 +197,14 @@ const Register = () =>
 
 
                                                 <div>
-                                                    {/* <div className="relative">
-                                                        <input  id="hs-floating-underline-input-passowrd" className="peer py-4 px-0 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 text-sm placeholder:text-transparent focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-gray-700 dark:text-gray-400 dark:focus:ring-gray-600 dark:focus:border-b-gray-600
-                                    focus:pt-6
-                                    focus:pb-2
-                                    focus:outline-none
-                                    [&:not(:placeholder-shown)]:pt-6
-                                    [&:not(:placeholder-shown)]:pb-2
-                                    autofill:pt-6
-                                    autofill:pb-2"placeholder='Alternate Number' />
-                                                        <label htmlFor="hs-floating-underline-input-passowrd" className="absolute top-0 start-0 py-4 px-0 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent dark:text-white peer-disabled:opacity-50 peer-disabled:pointer-events-none
-                                        peer-focus:text-xs
-                                        peer-focus:-translate-y-1.5
-                                        peer-focus:text-gray-500
-                                        peer-[:not(:placeholder-shown)]:text-xs
-                                        peer-[:not(:placeholder-shown)]:-translate-y-1.5
-                                        peer-[:not(:placeholder-shown)]:text-gray-500">Alternate Number</label>
-                                                    </div> */}
                                                     <div className="relative z-0 w-full mb-5 group">
-                                                        <input type="text" name="alter_no"
-                                                            value={ values.alter_no } onBlur={ handleBlur } onChange={ handleChange } id="floating_password" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                                                        <input type="text" name="alternate_number"
+                                                            value={ values.alternate_number } onBlur={ handleBlur } onChange={ handleChange } id="floating_password" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
                                                         <label htmlFor="floating_password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Alternate Number</label>
                                                     </div>
                                                 </div>
 
                                                 <div>
-                                                    {/* <div className="relative">
-                                                        <input  id="hs-floating-underline-input-passowrd" className="peer py-4 px-0 block w-full bg-transparent border-t-transparent border-b-2 border-x-transparent border-b-gray-200 text-sm placeholder:text-transparent focus:border-t-transparent focus:border-x-transparent focus:border-b-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none dark:border-b-gray-700 dark:text-gray-400 dark:focus:ring-gray-600 dark:focus:border-b-gray-600
-                                    focus:pt-6
-                                    focus:pb-2
-                                    focus:outline-none
-                                    [&:not(:placeholder-shown)]:pt-6
-                                    [&:not(:placeholder-shown)]:pb-2
-                                    autofill:pt-6
-                                    autofill:pb-2"placeholder='STD*' />
-                                                        <label htmlFor="hs-floating-underline-input-passowrd" className="absolute top-0 start-0 py-4 px-0 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent dark:text-white peer-disabled:opacity-50 peer-disabled:pointer-events-none
-                                        peer-focus:text-xs
-                                        peer-focus:-translate-y-1.5
-                                        peer-focus:text-gray-500
-                                        peer-[:not(:placeholder-shown)]:text-xs
-                                        peer-[:not(:placeholder-shown)]:-translate-y-1.5
-                                        peer-[:not(:placeholder-shown)]:text-gray-500">STD*</label>
-                                                        {
-                                                    </div> */}
                                                     <div className="relative z-0 w-full mb-5 group">
                                                         <input type="tel" name="std"
                                                             value={ values.std } onChange={ handleChange } onBlur={ handleBlur } id="floating_password" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
@@ -218,33 +212,44 @@ const Register = () =>
                                                         { errors.std && touched.std ? <p className=' text-red-600 mt-1'>{ errors.std }</p> : null }
                                                     </div>
                                                 </div>
+                                                <div>
+                                                    <div className="relative z-0 w-full mb-5 group">
+                                                        <input type="tel" name="society"
+                                                            value={ values.society } onChange={ handleChange } onBlur={ handleBlur } id="floating_password" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                                                        <label htmlFor="floating_password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">SOCIETY*</label>
+                                                        { errors.society && touched.society ? <p className=' text-red-600 mt-1'>{ errors.society }</p> : null }
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div className="relative z-0 w-full mb-5 group">
+                                                        <input type="text" name="div"
+                                                            value={ values.div } onChange={ handleChange } onBlur={ handleBlur } id="floating_password" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                                                        <label htmlFor="floating_password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">DIV*</label>
+                                                        { errors.div && touched.div ? <p className=' text-red-600 mt-1'>{ errors.div }</p> : null }
+                                                    </div>
+                                                </div>
 
                                                 <div>
                                                     <div className="flex flex-wrap">
                                                         <div className="flex items-center me-4">
-                                                            <input id="red-radio" type="radio" value="male" name="gender" onChange={ handleChange } onBlur={ handleBlur } className="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                                                            <input id="red-radio" type="radio" value="M" name="gender" onChange={ handleChange } onBlur={ handleBlur } className="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                                                             <label htmlFor="red-radio" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Male</label>
                                                         </div>
                                                         <div className="flex items-center me-4">
-                                                            <input id="green-radio" type="radio" value="female" name="gender" onChange={ handleChange } onBlur={ handleBlur } className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                                                            <input id="green-radio" type="radio" value="F" name="gender" onChange={ handleChange } onBlur={ handleBlur } className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                                                             <label htmlFor="green-radio" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Female</label>
                                                         </div>
                                                         { errors.gender && touched.gender ? <p className=' text-red-600 mt-1'>{ errors.gender }</p> : null }
                                                     </div>
                                                 </div>
-
-
-
                                             </div>
                                         </div>
                                         <div className="mt-5">
-                                            {/* <button type="submit" className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">Get started</button> */ }
                                             <button type='submit' className="text-white w-full font-semibold bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80  rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">Register</button>
                                             <button type='reset' className="text-white w-full bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Cancel</button>
                                         </div>
                                     </div>
                                 </div>
-                                {/* </div> */ }
                             </form>
                         </div>
                     </div>

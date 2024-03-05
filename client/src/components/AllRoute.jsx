@@ -8,8 +8,6 @@ import Register from '../pages/Register';
 import PageNotFound from '../pages/PageNotFound';
 import Logout from '../pages/Logout';
 import Extras from '../pages/Extras';
-import OldData from '../pages/OldData';
-import NewData from '../pages/NewData';
 import { useAuth } from '../Hooks/useAuth';
 const AllRoute = () =>
 {
@@ -23,8 +21,6 @@ const AllRoute = () =>
                 <Route path='/extras' element={ <Extras /> } />
                 <Route path='/payment' element={ <Payment /> } />
                 { user[ 0 ]?.isAdmin && <Route path='/admin' element={ <Admin /> } >
-                    <Route path='olddata' element={ <OldData /> } />
-                    <Route path='newdata' element={ <NewData /> } />
                 </Route> }
                 <Route path='/register' element={ <Register /> } />
                 <Route path='/logout' element={ <Logout /> } />

@@ -1,11 +1,13 @@
 import about_logo from '../images/About us page-rafiki.png';
+import graph from '../images/graph (1).png';
 const AboutUs = () =>
 {
     return (
         <>
             <h1 className="text-6xl mt-5"><b>Welcome to ISTRAVELS.</b></h1>
             <div className='flex justify-between mt-5 tablet:flex-col items-center'>
-                <div>
+                <div className='flex justify-center items-center'>
+                    <img src={ graph } alt="bg" className='absolute left-20' />
                     <img src={ about_logo } alt="about_us" className='rounded-md w-[28vw]  relative h-full object-cover left-10 tablet:w-3/4' />
                 </div>
                 <div className='w-[50vw] tablet:text-center tablet:w-[90vw]'>

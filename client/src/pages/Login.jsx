@@ -1,4 +1,3 @@
-import login_logo from '../images/login.jpeg';
 import { useFormik } from 'formik';
 import { loginSchema } from './../schemas/login';
 import axios from 'axios';
@@ -12,7 +11,7 @@ import ChangePassword from '../components/ChangePassword';
 import login_image from '../images/Login-amico.png';
 
 const initialValues = {
-    mobile_no: "",
+    mobile_number: "",
     password: "",
 };
 
@@ -31,7 +30,7 @@ const Login = () =>
             try
             {
                 const payload = {
-                    mobile_no: parseInt( values.mobile_no ),
+                    mobile_number: parseInt( values.mobile_number ),
                     password: values.password,
                 };
                 const res = await axios.post( "http://localhost:9000/api/auth/login", payload );
@@ -82,9 +81,9 @@ const Login = () =>
                         <form onSubmit={ handleSubmit }>
                             <div className="mb-4">
                                 <div className="relative z-0 w-full mb-5 group">
-                                    <input type="tel" name="mobile_no" id="floating_email" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={ values.mobile_no } onChange={ handleChange } onBlur={ handleBlur } />
+                                    <input type="tel" name="mobile_number" id="floating_email" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " value={ values.mobile_number } onChange={ handleChange } onBlur={ handleBlur } />
                                     <label htmlFor="floating_email" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Mobile Number</label>
-                                    { errors.mobile_no && touched.mobile_no ? <p className=' text-red-600 mt-1'>{ errors.mobile_no }</p> : null }
+                                    { errors.mobile_number && touched.mobile_number ? <p className=' text-red-600 mt-1'>{ errors.mobile_number }</p> : null }
                                 </div>
                             </div>
 

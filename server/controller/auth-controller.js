@@ -26,9 +26,9 @@ const register = async ( req, res ) =>
 {
     try
     {
-        const { student_name,mobile_no,password,pick_up_address,drop_up_address,area,gender,std,alter_no} = req.body;
+        const { student_name,mobile_number,password,pick_up_address,drop_up_address,area,div,society,gender,payment_date,due_date,std,alternate_number} = req.body;
         // Check if the user already exists 
-        const userExist = await User.findOne( { mobile_no } );
+        const userExist = await User.findOne( { mobile_number } );
         if ( userExist )
         {
             if(userExist.status === false){
@@ -37,7 +37,7 @@ const register = async ( req, res ) =>
             return  res.status( 400 ).json( { message: "User Already Exist" } );
         }
 
-        const userExist2 = await AllUser.findOne( { mobile_no } );
+        const userExist2 = await AllUser.findOne( { mobile_number } );
         if ( userExist2 )
         {
             if(userExist2.status === false){
@@ -64,7 +64,6 @@ const register = async ( req, res ) =>
         {
             seqId = counterData.seq;
         }
-
         // Create the user with the incremented counter value
         const userCreated = await User.create( {
             id: seqId,
@@ -73,9 +72,14 @@ const register = async ( req, res ) =>
             pick_up_address,
             drop_up_address,
             area,
+            div,
+            society,
             gender,
+            payment_date,
+            due_date,
             std,
-            mobile_no,
+            mobile_number,
+            alternate_number,
         } );
         // console.log("New User",userCreated)
 
@@ -83,11 +87,25 @@ const register = async ( req, res ) =>
             _id:userCreated._id,
             id:seqId,
             student_name,
-            mobile_no,
-            Rate:userCreated.Rate,
+            pick_up_address,
+            drop_up_address,
+            area,
+            gender,
             std,
+            div,
+            society,
+            mobile_number,
+            alternate_number,
+            time:userCreated.time,
+            password,
+            route:userCreated.route,
+            pending_amount:userCreated.pending_amount,
+            paid_amount:userCreated.paid_amount,
+            payment_date:userCreated.payment_date,
+            due_date:userCreated.due_date,
             isAdmin:userCreated.isAdmin,
             status:userCreated.status,
+            rate:userCreated.rate,
         })
         // console.log("Payment",payment)
 
@@ -96,7 +114,7 @@ const register = async ( req, res ) =>
             id:seqId,
             student_name,
             password:userCreated.password,
-            mobile_no,
+            mobile_number,
             isAdmin:userCreated.isAdmin,
             status:userCreated.status,
         })
@@ -117,16 +135,16 @@ const register = async ( req, res ) =>
 
 const login = async (req,res) =>{
     try {
-        const {mobile_no,password} = req.body;
-        let userExist = await Logindb.findOne({mobile_no});
+        const {mobile_number,password} = req.body;
+        // console.log(mobile_number,"Number")
+        let userExist = await Logindb.findOne({mobile_number});
         if(!userExist){
             // 👇 for later use...
-            userExist = await User.findOne({mobile_no});
+            userExist = await User.findOne({mobile_number});
             if(!userExist){
                 return res.status(400).json({message:"Invalid Credentials"});
             }
         }
-
         const user = await userExist.comparePassword(password);
         if(user){
             res.status( 200 ).json( { msg: "Login Successful", token: await userExist.generateToken(), userId: userExist._id.toString() } );

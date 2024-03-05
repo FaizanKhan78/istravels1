@@ -30,7 +30,7 @@ export const AuthContextProvider = ( { children } ) =>
 
     const isLoggedIN = !!token;
 
-    // JWT AUTHENTICATION - to get the currently user Data.
+    //* JWT AUTHENTICATION - to get the currently user Data.
     async function userAuthentication ()
     {
         await axios.get( "http://localhost:9000/api/auth/payment", {
@@ -70,22 +70,6 @@ export const AuthContextProvider = ( { children } ) =>
         }
     };
 
-    const OldData = async () =>
-    {
-        try
-        {
-            const res = await axios.get( "http://localhost:9000/admin/getAllOldData", {
-                headers: {
-                    Authorization: `Bearer ${ token }`,
-                }
-            } );
-            setAllUserData( res.data );
-        } catch ( error )
-        {
-            toast.error( error );
-        }
-    };
-
     // ? Deleting the single User.
     const deleteUser = async ( id ) =>
     {
@@ -111,7 +95,7 @@ export const AuthContextProvider = ( { children } ) =>
     const showActiveUser = () =>
     {
         fetchData();
-        const users = data.filter( ( user ) => { return user.status; } );
+        const users = data.filter( ( user ) => { return user.status === true; } );
         setAllUserData( users );
         setToggleBUtton( false );
     };
@@ -136,7 +120,7 @@ export const AuthContextProvider = ( { children } ) =>
                     Authorization: `Bearer ${ token }`,
                 }
             } );
-            setAllUserData( allUserData.filter( ( user ) => user.mobile_no !== number ) );
+            setAllUserData( allUserData.filter( ( user ) => user.mobile_number !== number ) );
             // fetchData();
         } catch ( error )
         {
@@ -154,6 +138,7 @@ export const AuthContextProvider = ( { children } ) =>
         isLoggedIN,
         user,
         data,
+        token,
         toggleButton,
         allUserData,
         isLoading,
@@ -163,7 +148,6 @@ export const AuthContextProvider = ( { children } ) =>
         deleteUser,
         fetchData,
         setAllUserData,
-        OldData,
     };
     return (
         <AuthContext.Provider value={ payload }>

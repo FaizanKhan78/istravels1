@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { AlignJustify } from 'lucide-react';
 import { X } from 'lucide-react';
-import logo from '../logo/istravels-high-resolution-logo-white-transparent.png';
+import logo from '../images/istravels-high-resolution-logo-transparent.png';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../Hooks/useAuth';
 
@@ -18,22 +18,13 @@ const Navbar = () =>
     };
 
     // Array containing navigation items
-
     return (
-        <div className='bg-[#050517] flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-white'>
+        <div className='bg-[#11001c] flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-white'>
             {/* Logo */ }
-            <h1 className='max-w-36'><img src={ logo } /></h1>
+            <h1 className='max-w-28'><img src={ logo } /></h1>
 
             {/* Desktop Navigation */ }
             <ul className='hidden md:flex'>
-                {/* { navItems.map( item => (
-                    <li
-                        key={ item.id }
-                        className='p-4 hover:bg-[#241e64] rounded-xl m-2 cursor-pointer duration-300 hover:text-[#050517]'
-                    >
-                        { item.text }
-                    </li>
-                ) ) } */}
                 <li className='p-4  m-2'>
                     <NavLink to="/" className={ ( { isActive } ) => { return isActive ? "text-[#6a00f4]  text-xl relative before:content-[''] before:absolute before:block before:w-full before:h-[2px] before:bottom-0 before:left-0 before:bg-[#6a00f4] before:hover:scale-x-100 before:scale-x-0 before:origin-top-left before:transition before:ease-in-out before:duration-300" : "text-xl relative before:content-[''] before:absolute before:block before:w-full before:h-[2px] before:bottom-0 before:left-0 before:bg-white before:hover:scale-x-100 before:scale-x-0 before:origin-top-left before:transition before:ease-in-out before:duration-300"; } }>Home</NavLink>
                 </li>

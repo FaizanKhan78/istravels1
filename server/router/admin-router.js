@@ -4,7 +4,6 @@ const adminController = require("../controller/admin-controller");
 const authMiddleWare = require("../middleware/auth-middleware");
 const adminMiddleware = require("../middleware/admin-middleware");
 
-adminRouter.route('/getAllOldData').get(authMiddleWare,adminMiddleware,adminController.getAllOldData)
 
 adminRouter.route('/getAllNewData').get(authMiddleWare,adminMiddleware,adminController.getAllNewData)
 

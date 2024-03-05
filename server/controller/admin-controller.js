@@ -1,19 +1,11 @@
 const AllUser = require( '../models/allUser-model');
 const Logindb = require( '../models/login-modal' );
-const OldData = require( '../models/old-data-modal');
 const User = require('../models/user-model');
 // *----------
 // ? AllData
 // *----------
 
-const getAllOldData = async (req,res) =>{
-    try {
-        const allOldData = await OldData.find();
-        res.status(200).json(allOldData)
-    } catch (error) {
-        res.status(500).json(error);
-    }
-}
+
 
 const getAllNewData = async (req,res,next)=>{
     try {
@@ -26,7 +18,7 @@ const getAllNewData = async (req,res,next)=>{
 
 const setAllDataDate = async (req,res) =>{
     try{
-        const data = await AllUser.updateMany({std:{$gte:0}},req.body);
+        const data = await AllUser.updateMany({id:{$gte:1}},req.body);
         res.status(200).json(data);
     }catch(error){
         res.status(500).json(error);
@@ -36,11 +28,12 @@ const setAllDataDate = async (req,res) =>{
 const updateSingle = async (req,res) =>{
     try {
         const number = req.params.number;
-        const data = await AllUser.findOneAndUpdate({mobile_no:number},req.body,{
+        // console.log(number)
+        const data = await AllUser.findOneAndUpdate({mobile_number:number},req.body,{
             new:true,
         });
-        await User.findOneAndUpdate({mobile_no:number},req.body);
-        await Logindb.findOneAndUpdate({mobile_no:number},req.body);
+        await User.findOneAndUpdate({mobile_number:number},req.body);
+        await Logindb.findOneAndUpdate({mobile_number:number},req.body);
         res.status(200).json(data)
     } catch (error) {
         res.status(500).json(error);
@@ -61,4 +54,4 @@ const  deleteUser =async (req,res)=>{
     }
 }
 
-module.exports = {getAllOldData,setAllDataDate,updateSingle,deleteUser,getAllNewData}
+module.exports = {setAllDataDate,updateSingle,deleteUser,getAllNewData}
