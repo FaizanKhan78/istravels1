@@ -8,7 +8,7 @@ const connectDB = require("./utils/db");
 const errorMiddleware = require( './middleware/error-middleware' );
 //! Middleware.
 const corsOption = {
-    origin:["http://localhost:5173","https://deploy-mern-1whq.vercel.app"],
+    origin:"http://localhost:5173",
     methods:"GET,POST,DELETE,PATCH,PUT",
     credentials:true,
 }
