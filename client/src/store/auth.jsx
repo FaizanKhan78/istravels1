@@ -148,6 +148,7 @@ export const AuthContextProvider = ( { children } ) =>
         deleteUser,
         fetchData,
         setAllUserData,
+        userAuthentication,
     };
     return (
         <AuthContext.Provider value={ payload }>

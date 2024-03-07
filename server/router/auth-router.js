@@ -14,6 +14,8 @@ router.route('/login').post(validate(loginSchema),authController.login)
 
 router.route('/payment').get(authMiddleWare,authController.payment);
 
+router.route('/updatePassword/:number').patch(authController.updatePassword)
+
 // router.route('/olddata/:number').get(authController.oldData);
 
 

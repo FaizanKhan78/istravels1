@@ -64,7 +64,7 @@ const Login = () =>
                             Solving problems for every <span className="text-blue-600 dark:text-blue-500">team</span>
                         </h1>
                         <p className="mt-3 text-base text-gray-500">
-                            Built on standard web technology, teams use Preline to build beautiful cross-platform hybrid apps in a fraction of the time.
+                            Built on standard web technology, teams use ISTRAVELS to build beautiful cross-platform hybrid apps in a fraction of the time.
                         </p>
 
                         <div className="mt-8 w-full">
@@ -91,13 +91,12 @@ const Login = () =>
                                 <div className="relative z-0 w-full mb-5 group">
                                     <input type={ togglePassword ? "text" : "password" } name="password" id="floating_password" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " autoComplete='password' value={ values.password } onChange={ handleChange } onBlur={ handleBlur } />
                                     <label htmlFor="floating_password" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
-                                    <button type='button' className='absolute top-4 left-[100%] ' onClick={ handlePassword }> { !togglePassword ? <Eye /> : <EyeOff /> }</button>
+                                    <button type='button' className='absolute top-2 left-[95%] ' onClick={ handlePassword }> { !togglePassword ? <Eye /> : <EyeOff /> }</button>
                                     { errors.password && touched.password ? <p className=' text-red-600 mt-1'>{ errors.password }</p> : null }
                                 </div>
                             </div>
 
                             <div className="grid">
-                                {/* <button type="submit" className="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">Sign up</button> */ }
                                 <button type='submit' className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-semibold rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">Login</button>
                                 <button type='button' onClick={ handleChangePassword } className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-semibold rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Change Password</button>
                             </div>

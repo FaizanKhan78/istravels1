@@ -5,6 +5,7 @@ import { Trash2 } from 'lucide-react';
 import { FilePenLine } from 'lucide-react';
 import { Check, ArrowLeft, ArrowRight } from 'lucide-react';
 import ReactPaginate from "react-paginate";
+import UpdateAll from './UpdateAll';
 const AdminTable = () =>
 {
     const { fetchData, allUserData, data, setAllUserData, handleApproved, deleteUser, showActiveUser, showPendingUser } = useAuth();
@@ -16,6 +17,11 @@ const AdminTable = () =>
     const [ user, setUser ] = useState( [] );
     const [ searchText, setSearchText ] = useState( "" );
     const [ selectedFilter, setSelectedFilter ] = useState( "" );
+    const [ updateAllModal, setUpdateAllModal ] = useState( false );
+    const updateModal = () =>
+    {
+        setUpdateAllModal( !updateAllModal );
+    };
 
     const [ pageNumber, setPageNumber ] = useState( 0 );
     const recordsPrePage = 15;
@@ -184,7 +190,6 @@ const AdminTable = () =>
     }
 
     const pageVisited = pageNumber * recordsPrePage;
-    // console.log( pageVisited );
     const sortedData = [ ...allUserData ].sort( ( a, b ) => a.id - b.id );
     const display = sortedData
         .slice( pageVisited, pageVisited + recordsPrePage )
@@ -209,17 +214,11 @@ const AdminTable = () =>
             </tr>
         ) );
 
-    // console.log( display );
-
     const pageCount = Math.ceil( allUserData.length / recordsPrePage );
     const changePage = ( { selected } ) =>
     {
         setPageNumber( selected );
-    };
-
-
-    // http://localhost:9000/admin/setAllDataDate
-    return (
+    }; return (
         <>
             <div>
                 <div className="border-b border-gray-200 dark:border-gray-700">
@@ -234,7 +233,7 @@ const AdminTable = () =>
                 </div>
                 <div className='flex justify-between'>
                     <input type="text" className="py-3 px-4 block w-3/5 border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Search..." value={ searchText } onChange={ handleChange } />
-                    <button>
+                    <button className=' bg-blue-100 text-black pl-6 pr-6 rounded-xl' onClick={ updateModal }>
                         Update All
                     </button>
                     <select onChange={ handleFilterChange } className='text-black pl-6 pr-6 pt-2 pb-2 rounded-xl bg-blue-100'>
@@ -340,6 +339,7 @@ const AdminTable = () =>
                     </style>
                 </> }
                 { modal && <ShowModal user={ user } setModal={ setModal } /> }
+                { updateAllModal && <UpdateAll updateModal={ updateModal } /> }
             </div >
         </>
     );

@@ -79,49 +79,39 @@ const Navbar = () =>
             >
                 {/* Mobile Logo */ }
                 <h1 className='max-w-36'><img src={ logo } /></h1>
-
-                {/* Mobile Navigation Items */ }
-                {/* { navItems.map( item => (
-                    <li
-                        key={ item.id }
-                        className='p-4 border-b rounded-xl hover:bg-[#232069] duration-300 hover:text-[#050517] cursor-pointer border-gray-600'
-                    >
-                        { item.text }
-                    </li>
-                ) ) } */}
-                <li className='p-4 border-b  duration-300  cursor-pointer border-gray-600'>
+                <li className='p-4 border-b  duration-300  cursor-pointer border-gray-600' onClick={ handleNav }>
                     <NavLink to="/" className={ ( { isActive } ) => { return isActive ? "text-[#6a00f4]  text-xl relative before:content-[''] before:absolute before:block before:w-full before:h-[2px] before:bottom-0 before:left-0 before:bg-[#6a00f4] before:hover:scale-x-100 before:scale-x-0 before:origin-top-left before:transition before:ease-in-out before:duration-300" : "text-xl relative before:content-[''] before:absolute before:block before:w-full before:h-[2px] before:bottom-0 before:left-0 before:bg-white before:hover:scale-x-100 before:scale-x-0 before:origin-top-left before:transition before:ease-in-out before:duration-300"; } }>Home</NavLink>
                 </li>
-                <li className='p-4 border-b  duration-300  cursor-pointer border-gray-600'>
+                <li className='p-4 border-b  duration-300  cursor-pointer border-gray-600' onClick={ handleNav }>
                     <NavLink to='/aboutUs' className={ ( { isActive } ) => { return isActive ? "text-[#6a00f4]  text-xl relative before:content-[''] before:absolute before:block before:w-full before:h-[2px] before:bottom-0 before:left-0 before:bg-[#6a00f4] before:hover:scale-x-100 before:scale-x-0 before:origin-top-left before:transition before:ease-in-out before:duration-300" : "text-xl relative before:content-[''] before:absolute before:block before:w-full before:h-[2px] before:bottom-0 before:left-0 before:bg-white before:hover:scale-x-100 before:scale-x-0 before:origin-top-left before:transition before:ease-in-out before:duration-300"; } }>About Us</NavLink>
 
                 </li>
-                { user[ 0 ]?.isAdmin && <li className='p-4 border-b  duration-300  cursor-pointer border-gray-600'>
+                { user[ 0 ]?.isAdmin && <li className='p-4 border-b  duration-300  cursor-pointer border-gray-600' onClick={ handleNav }>
                     <NavLink to='/admin' className={ ( { isActive } ) => { return isActive ? "text-[#6a00f4]  text-xl relative before:content-[''] before:absolute before:block before:w-full before:h-[2px] before:bottom-0 before:left-0 before:bg-[#6a00f4] before:hover:scale-x-100 before:scale-x-0 before:origin-top-left before:transition before:ease-in-out before:duration-300" : "text-xl relative before:content-[''] before:absolute before:block before:w-full before:h-[2px] before:bottom-0 before:left-0 before:bg-white before:hover:scale-x-100 before:scale-x-0 before:origin-top-left before:transition before:ease-in-out before:duration-300"; } }>Admin</NavLink>
                 </li> }
                 {
                     isLoggedIN ? (
                         <>
-                            <li className='p-4 border-b  duration-300  cursor-pointer border-gray-600'>
+                            <li className='p-4 border-b  duration-300  cursor-pointer border-gray-600' onClick={ handleNav }>
                                 <NavLink to='/logout' className={ ( { isActive } ) => { return isActive ? "text-[#6a00f4]  text-xl relative before:content-[''] before:absolute before:block before:w-full before:h-[2px] before:bottom-0 before:left-0 before:bg-[#6a00f4] before:hover:scale-x-100 before:scale-x-0 before:origin-top-left before:transition before:ease-in-out before:duration-300" : "text-xl relative before:content-[''] before:absolute before:block before:w-full before:h-[2px] before:bottom-0 before:left-0 before:bg-white before:hover:scale-x-100 before:scale-x-0 before:origin-top-left before:transition before:ease-in-out before:duration-300"; } }>Logout</NavLink>
                             </li>
-                            <li className='p-4 border-b  duration-300  cursor-pointer border-gray-600'>
+                            <li className='p-4 border-b  duration-300  cursor-pointer border-gray-600' onClick={ handleNav }>
                                 <NavLink to='/extras' className={ ( { isActive } ) => { return isActive ? "text-[#6a00f4]  text-xl relative before:content-[''] before:absolute before:block before:w-full before:h-[2px] before:bottom-0 before:left-0 before:bg-[#6a00f4] before:hover:scale-x-100 before:scale-x-0 before:origin-top-left before:transition before:ease-in-out before:duration-300" : "text-xl relative before:content-[''] before:absolute before:block before:w-full before:h-[2px] before:bottom-0 before:left-0 before:bg-white before:hover:scale-x-100 before:scale-x-0 before:origin-top-left before:transition before:ease-in-out before:duration-300"; } }>Extras</NavLink>
                             </li>
                         </>
                     ) :
                         (
                             <>
-                                <li className='p-4 border-b  duration-300  cursor-pointer border-gray-600'>
+                                <li className='p-4 border-b  duration-300  cursor-pointer border-gray-600' onClick={ handleNav }>
 
                                     <NavLink to='/login' className={ ( { isActive } ) => { return isActive ? "text-[#6a00f4]  text-xl relative before:content-[''] before:absolute before:block before:w-full before:h-[2px] before:bottom-0 before:left-0 before:bg-[#6a00f4] before:hover:scale-x-100 before:scale-x-0 before:origin-top-left before:transition before:ease-in-out before:duration-300" : "text-xl relative before:content-[''] before:absolute before:block before:w-full before:h-[2px] before:bottom-0 before:left-0 before:bg-white before:hover:scale-x-100 before:scale-x-0 before:origin-top-left before:transition before:ease-in-out before:duration-300"; } }>Login</NavLink>
                                 </li>
-                                <li className='p-4 border-b  duration-300  cursor-pointer border-gray-600'>
+                                <li className='p-4 border-b  duration-300  cursor-pointer border-gray-600' onClick={ handleNav }>
                                     <NavLink to='/register' className={ ( { isActive } ) => { return isActive ? "text-[#6a00f4]  text-xl relative before:content-[''] before:absolute before:block before:w-full before:h-[2px] before:bottom-0 before:left-0 before:bg-[#6a00f4] before:hover:scale-x-100 before:scale-x-0 before:origin-top-left before:transition before:ease-in-out before:duration-300" : "text-xl relative before:content-[''] before:absolute before:block before:w-full before:h-[2px] before:bottom-0 before:left-0 before:bg-white before:hover:scale-x-100 before:scale-x-0 before:origin-top-left before:transition before:ease-in-out before:duration-300"; } }>Register</NavLink>
                                 </li>
                             </>
                         ) }
-                { user[ 0 ]?.status && <li className='p-4 border-b  duration-300  cursor-pointer border-gray-600'>
+                { user[ 0 ]?.status && <li className='p-4 border-b  duration-300  cursor-pointer border-gray-600' onClick={ handleNav }>
                     <NavLink to='/payment' className={ ( { isActive } ) => { return isActive ? "text-[#6a00f4]  text-xl relative before:content-[''] before:absolute before:block before:w-full before:h-[2px] before:bottom-0 before:left-0 before:bg-[#6a00f4] before:hover:scale-x-100 before:scale-x-0 before:origin-top-left before:transition before:ease-in-out before:duration-300" : "text-xl relative before:content-[''] before:absolute before:block before:w-full before:h-[2px] before:bottom-0 before:left-0 before:bg-white before:hover:scale-x-100 before:scale-x-0 before:origin-top-left before:transition before:ease-in-out before:duration-300"; } }>Payment</NavLink>
                 </li> }
             </ul>

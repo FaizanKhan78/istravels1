@@ -47,6 +47,7 @@ loginModal.methods.generateToken = async function(){
         process.env.JWT_SECRET_KEY
         )
     }catch(error){
+        console.log(error)
         res.status(400).json(error);
     }
 }
